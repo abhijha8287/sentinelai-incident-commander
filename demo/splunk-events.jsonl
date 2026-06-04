@@ -1,0 +1,6 @@
+{"timestamp": "2026-06-04T01:50:46.755380Z", "service": "Payment Service", "level": "info", "message": "Deployment payment-service v2.3 completed", "metric": null, "value": null, "deployment_version": "v2.3"}
+{"timestamp": "2026-06-04T01:56:46.755380Z", "service": "PostgreSQL Database", "level": "warn", "message": "p95 query latency crossed 1200ms", "metric": "db_latency_ms", "value": 1240.0, "deployment_version": null}
+{"timestamp": "2026-06-04T02:00:46.755380Z", "service": "Payment Service", "level": "error", "message": "Checkout API timeout waiting for ledger write", "metric": "error_rate", "value": 7.8, "deployment_version": null}
+{"timestamp": "2026-06-04T02:04:46.755380Z", "service": "Payment Service", "level": "critical", "message": "Splunk alert fired: payment error rate above threshold", "metric": "anomaly_score", "value": 0.94, "deployment_version": null}
+{"timestamp": "2026-06-04T02:14:46.755380Z", "service": "Authentication Service", "level": "info", "message": "Token validation healthy", "metric": "error_rate", "value": 0.2, "deployment_version": null}
+{"timestamp": "2026-06-04T02:17:46.755380Z", "service": "Inventory Service", "level": "warn", "message": "Downstream checkout retries increased", "metric": "retry_rate", "value": 3.1, "deployment_version": null}

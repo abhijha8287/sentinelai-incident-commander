@@ -1,0 +1,14 @@
+node_modules/
+.next/
+out/
+dist/
+build/
+.venv/
+__pycache__/
+*.py[cod]
+.env
+.chrome-preview*/
+preview.png
+*.log
+postgres-data/
+splunk-data/

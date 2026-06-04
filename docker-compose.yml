@@ -1,0 +1,59 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: sentinel
+      POSTGRES_PASSWORD: sentinel
+      POSTGRES_DB: sentinel
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+    env_file:
+      - .env.example
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:8000/api
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000/api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  splunk:
+    image: splunk/splunk:latest
+    platform: linux/amd64
+    environment:
+      SPLUNK_START_ARGS: "--accept-license"
+      SPLUNK_PASSWORD: changeme
+      SPLUNK_HEC_TOKEN: sentinel-demo-token
+    ports:
+      - "8001:8000"
+      - "8088:8088"
+      - "8089:8089"
+    volumes:
+      - splunk-data:/opt/splunk/var
+
+  splunk-mcp:
+    image: python:3.12-slim
+    command: python -m http.server 7000
+    ports:
+      - "7000:7000"
+    depends_on:
+      - splunk
+
+volumes:
+  postgres-data:
+  splunk-data:
